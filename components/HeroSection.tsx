@@ -27,7 +27,7 @@ const HeroSection: React.FC = () => {
           <div className="md:w-1/2 flex justify-center md:justify-end">
             <div className="relative w-64 h-80 md:w-80 md:h-96 lg:w-96 lg:h-[30rem] rounded-lg overflow-hidden shadow-2xl transform transition-all duration-500 hover:scale-105 group">
               <img 
-                src={DOCTOR_IMAGE_URL} 
+                src={Generated Image June 12, 2025 - 11_54AM (1).jpeg} 
                 alt="Médico Dominicano Sonriendo" 
                 className="absolute inset-0 w-full h-full object-cover group-hover:opacity-90 transition-opacity"
               />
