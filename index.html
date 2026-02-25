@@ -4,37 +4,390 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Centro de Atención Primaria GENIMAD</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
     <style>
-        body {
+        /* Paleta de colores basada en el logo */
+        :root {
+            --teal-primario: #358B8D;
+            --naranja-secundario: #E27D32;
+            --naranja-claro: #F5A623;
+            --blanco: #ffffff;
+            --fondo-gris: #f4f7f6;
+            --texto-oscuro: #333333;
+        }
+
+        * {
             margin: 0;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #ffffff;
-            color: #006d6d;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            color: var(--texto-oscuro);
+            background-color: var(--fondo-gris);
+            line-height: 1.6;
+        }
+
+        /* Utilidades Generales */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 28px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+
+        .btn-naranja {
+            background-color: var(--naranja-secundario);
+            color: var(--blanco);
+            box-shadow: 0 4px 6px rgba(226, 125, 50, 0.3);
+        }
+
+        .btn-naranja:hover {
+            background-color: #c76b29;
+            transform: translateY(-2px);
+        }
+
+        .btn-whatsapp {
+            background-color: #25D366;
+            color: white;
+            box-shadow: 0 4px 6px rgba(37, 211, 102, 0.3);
+        }
+
+        .btn-whatsapp:hover {
+            background-color: #1ebe57;
+            transform: translateY(-2px);
+        }
+
+        /* Encabezado (Header) */
+        header {
+            background-color: var(--blanco);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            padding: 10px 0;
+        }
+
+        .header-content {
             display: flex;
-            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo img {
+            max-height: 80px; /* Ajusta este valor según necesites */
+            width: auto;
+        }
+
+        /* Sección Hero */
+        .hero {
+            background: linear-gradient(rgba(53, 139, 141, 0.9), rgba(53, 139, 141, 0.8)), url('https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80') center/cover;
+            color: var(--blanco);
+            padding: 100px 20px;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+        }
+
+        .hero p {
+            font-size: 1.5rem;
+            margin-bottom: 40px;
+            font-weight: 300;
+            font-style: italic;
+        }
+
+        .hero-botones {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        /* Sección de Servicios */
+        .servicios-section {
+            padding: 80px 0;
+            background-color: var(--blanco);
+        }
+
+        .section-title {
+            text-align: center;
+            color: var(--teal-primario);
+            font-size: 2.5rem;
+            margin-bottom: 50px;
+        }
+
+        .servicios-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .servicio-card {
+            background: var(--fondo-gris);
+            padding: 25px 20px;
+            border-radius: 10px;
+            text-align: center;
+            border-bottom: 4px solid var(--naranja-secundario);
+            transition: transform 0.3s ease;
+        }
+
+        .servicio-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+        }
+
+        .servicio-card i {
+            font-size: 2.5rem;
+            color: var(--teal-primario);
+            margin-bottom: 15px;
+        }
+
+        .servicio-card h3 {
+            font-size: 1.1rem;
+            color: var(--texto-oscuro);
+        }
+
+        /* Sección de Contacto */
+        .contacto-section {
+            padding: 80px 0;
+            background-color: var(--fondo-gris);
+        }
+
+        .contacto-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+        }
+
+        .info-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 25px;
+        }
+
+        .info-item i {
+            font-size: 1.5rem;
+            color: var(--naranja-secundario);
+            margin-right: 20px;
+            margin-top: 5px;
+        }
+
+        .contacto-cta {
+            background-color: var(--blanco);
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            text-align: center;
+        }
+
+        .contacto-cta h3 {
+            color: var(--teal-primario);
+            margin-bottom: 20px;
+            font-size: 1.8rem;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--teal-primario);
+            color: var(--blanco);
+            text-align: center;
+            padding: 20px 0;
+        }
+
+        /* Botón Flotante WhatsApp */
+        .whatsapp-float {
+            position: fixed;
+            width: 60px;
+            height: 60px;
+            bottom: 40px;
+            right: 40px;
+            background-color: #25d366;
+            color: #FFF;
+            border-radius: 50px;
+            text-align: center;
+            font-size: 30px;
+            box-shadow: 2px 2px 3px #999;
+            z-index: 1000;
+            display: flex;
             align-items: center;
             justify-content: center;
-            min-height: 100vh;
-            text-align: center;
-            padding: 2rem;
+            text-decoration: none;
+            transition: transform 0.3s ease;
         }
-        img {
-            max-width: 200px;
-            margin-bottom: 2rem;
+
+        .whatsapp-float:hover {
+            transform: scale(1.1);
         }
-        h1 {
-            font-size: 2rem;
-            color: #f26d2f;
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .contacto-grid {
+                grid-template-columns: 1fr;
+            }
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+            .header-content {
+                flex-direction: column;
+                gap: 15px;
+            }
         }
-        p {
-            font-size: 1.2rem;
-            margin-top: 1rem;
-        }
-        .highlight {
-            color: #f26d2f;
-            font-weight: bold;
-        }
-        footer {
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="container header-content">
+            <div class="logo">
+                <img src="logo full color.png" alt="Centro de Atención Primaria GENIMAD">
+            </div>
+            <div class="header-contacto">
+                <a href="tel:8293744363" class="btn btn-naranja"><i class="fas fa-phone-alt"></i> (829) 374-4363</a>
+            </div>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="container">
+            <h1>Bienvenidos a GENIMAD</h1>
+            <p>"Salud y Bienestar en cada paso"</p>
+            <div class="hero-botones">
+                <a href="https://wa.me/18293744363?text=Hola,%20me%20gustaría%20agendar%20una%20cita%20médica." target="_blank" class="btn btn-whatsapp"><i class="fab fa-whatsapp"></i> Agendar por WhatsApp</a>
+                <a href="#servicios" class="btn btn-naranja">Ver Servicios</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="servicios" class="servicios-section">
+        <div class="container">
+            <h2 class="section-title">Nuestros Servicios</h2>
+            <div class="servicios-grid">
+                
+                <div class="servicio-card">
+                    <i class="fas fa-ambulance"></i>
+                    <h3>Urgencias</h3>
+                </div>
+                <div class="servicio-card">
+                    <i class="fas fa-vials"></i>
+                    <h3>Laboratorios</h3>
+                </div>
+                <div class="servicio-card">
+                    <i class="fas fa-heartbeat"></i>
+                    <h3>Doppler Venoso y Arterial</h3>
+                </div>
+                <div class="servicio-card">
+                    <i class="fas fa-x-ray"></i>
+                    <h3>Doppler Carotídeo y Vértebras</h3>
+                </div>
+                <div class="servicio-card">
+                    <i class="fas fa-desktop"></i>
+                    <h3>Sonografía General</h3>
+                </div>
+                <div class="servicio-card">
+                    <i class="fas fa-deaf"></i>
+                    <h3>Audiometría y Timpanometría</h3>
+                </div>
+                <div class="servicio-card">
+                    <i class="fas fa-wave-square"></i>
+                    <h3>Electrocardiograma (ECG)</h3>
+                </div>
+                <div class="servicio-card">
+                    <i class="fas fa-clipboard-list"></i>
+                    <h3>Mapa y Holter</h3>
+                </div>
+                <div class="servicio-card">
+                    <i class="fas fa-user-md"></i>
+                    <h3>Consulta Médico General</h3>
+                </div>
+                <div class="servicio-card">
+                    <i class="fas fa-procedures"></i>
+                    <h3>Endoscopia y Colonoscopia</h3>
+                </div>
+                <div class="servicio-card">
+                    <i class="fas fa-weight"></i>
+                    <h3>Balón Gástrico</h3>
+                </div>
+                <div class="servicio-card">
+                    <i class="fas fa-file-medical-alt"></i>
+                    <h3>Evaluación Preanestésica</h3>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <section id="contacto" class="contacto-section">
+        <div class="container">
+            <h2 class="section-title">Contáctanos</h2>
+            <div class="contacto-grid">
+                
+                <div class="contacto-info">
+                    <div class="info-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <div>
+                            <h4>Nuestra Ubicación</h4>
+                            <p>Av. Hermanas Mirabal 449, Buena Vista 1era,<br>Villa Mella, Santo Domingo Norte.</p>
+                        </div>
+                    </div>
+                    <div class="info-item">
+                        <i class="fas fa-phone-alt"></i>
+                        <div>
+                            <h4>Teléfonos</h4>
+                            <p><a href="tel:8293744363" style="color: inherit; text-decoration: none;">(829) 374-4363</a></p>
+                            <p><a href="tel:8298935097" style="color: inherit; text-decoration: none;">(829) 893-5097</a></p>
+                        </div>
+                    </div>
+                    <div class="info-item">
+                        <i class="fas fa-envelope"></i>
+                        <div>
+                            <h4>Correo Electrónico</h4>
+                            <p><a href="mailto:atencion.primaria@genimad.com" style="color: inherit; text-decoration: none;">atencion.primaria@genimad.com</a></p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="contacto-cta">
+                    <h3>¿Necesitas agendar tu visita?</h3>
+                    <p style="margin-bottom: 30px;">Nuestro equipo de atención al paciente está listo para ayudarte. Escríbenos por WhatsApp o llámanos para programar tu cita rápidamente.</p>
+                    <a href="https://wa.me/18293744363?text=Hola,%20me%20gustaría%20agendar%20una%20cita%20médica." target="_blank" class="btn btn-whatsapp" style="display: block; margin-bottom: 15px;">
+                        <i class="fab fa-whatsapp"></i> Chat vía WhatsApp
+                    </a>
+                    <a href="tel:8293744363" class="btn btn-naranja" style="display: block;">
+                        <i class="fas fa-phone"></i> Llamar ahora
+                    </a>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 Centro de Atención Primaria GENIMAD. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+    <a href="https://wa.me/18293744363?text=Hola,%20me%20gustaría%20agendar%20una%20cita%20médica." class="whatsapp-float" target="_blank" title="Contáctanos por WhatsApp">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+</body>
+</html>        footer {
             margin-top: 3rem;
             font-size: 0.9rem;
             color: #888;
