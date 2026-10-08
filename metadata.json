@@ -1,0 +1,8 @@
+{
+  "name": "Centro Médico GENIMAD",
+  "description": "Centro de Atención Primaria en Villa Mella, Santo Domingo Norte. Ofrecemos urgencias, laboratorios, sonografía, doppler y consultas generales.",
+  "permissions": [],
+  "capabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}
