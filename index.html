@@ -26,6 +26,12 @@
       "url": "https://www.genimad.com",
       "telephone": "+1-829-374-4363",
       "email": "atencion.primaria@genimad.com",
+      "hasMap": "https://maps.app.goo.gl/oNPK6iu3JxbWkXbB7",
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": 18.5332961,
+        "longitude": -69.9066462
+      },
       "address": {
         "@type": "PostalAddress",
         "streetAddress": "Av. Hermanas Mirabal 449, Buena Vista 1era",
@@ -36,7 +42,13 @@
       "medicalSpecialty": [
         "PrimaryCare",
         "Emergency",
-        "LaboratoryScience"
+        "LaboratoryScience",
+        "Cardiovascular",
+        "Dermatology",
+        "Gastroenterology",
+        "Gynecologic",
+        "Pulmonary",
+        "Orthopedic"
       ],
       "availableService": [
         {
@@ -52,6 +64,14 @@
           "name": "Electrocardiograma"
         }
       ],
+      "openingHoursSpecification": [
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+          "opens": "07:00",
+          "closes": "17:00"
+        }
+      ],
       "priceRange": "$$"
     }
     </script>
@@ -60,10 +80,10 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <style>
-        /* Paleta de colores basada en el logo */
+        /* Paleta de colores basada en el logo y manual corporativo */
         :root {
-            --teal-primario: #358B8D;
-            --naranja-secundario: #E27D32;
+            --teal-primario: #008F94;
+            --naranja-secundario: #E38A37;
             --naranja-claro: #F5A623;
             --blanco: #ffffff;
             --fondo-gris: #f4f7f6;
@@ -103,11 +123,11 @@
         .btn-naranja {
             background-color: var(--naranja-secundario);
             color: var(--blanco);
-            box-shadow: 0 4px 6px rgba(226, 125, 50, 0.3);
+            box-shadow: 0 4px 6px rgba(227, 138, 55, 0.35);
         }
 
         .btn-naranja:hover {
-            background-color: #c76b29;
+            background-color: #c87225;
             transform: translateY(-2px);
         }
 
@@ -120,6 +140,70 @@
         .btn-whatsapp:hover {
             background-color: #1ebe57;
             transform: translateY(-2px);
+        }
+
+        .btn-outline {
+            border: 2px solid var(--blanco);
+            color: var(--blanco);
+            background-color: transparent;
+        }
+
+        .btn-outline:hover {
+            background-color: var(--blanco);
+            color: var(--teal-primario);
+            transform: translateY(-2px);
+        }
+
+        /* Botones específicos de la sección Hero */
+        .btn-hero-cta {
+            background-color: var(--naranja-secundario);
+            color: var(--blanco);
+            box-shadow: 0 4px 18px rgba(227, 138, 55, 0.45);
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .btn-hero-cta:hover {
+            background-color: #c87225;
+            color: var(--blanco);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 22px rgba(227, 138, 55, 0.6);
+        }
+
+        .btn-hero-white {
+            background-color: var(--blanco);
+            color: var(--teal-primario);
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+            display: inline-flex;
+            align-items: center;
+            gap: 9px;
+        }
+
+        .btn-hero-white:hover {
+            background-color: #f0fdfa;
+            color: #00696c;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.14);
+        }
+
+        .btn-hero-glass {
+            background-color: rgba(255, 255, 255, 0.16);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1.5px solid rgba(255, 255, 255, 0.5);
+            color: var(--blanco);
+            display: inline-flex;
+            align-items: center;
+            gap: 9px;
+        }
+
+        .btn-hero-glass:hover {
+            background-color: var(--blanco);
+            color: var(--teal-primario);
+            border-color: var(--blanco);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
         }
 
         /* Encabezado (Header) */
@@ -145,29 +229,55 @@
 
         /* Sección Hero */
         .hero {
-            background: linear-gradient(rgba(53, 139, 141, 0.7), rgba(53, 139, 141, 0.6)), url('image_2.png') center/cover;
+            background: 
+                radial-gradient(circle at 85% 15%, rgba(227, 138, 55, 0.25) 0%, transparent 45%),
+                radial-gradient(circle at 10% 90%, rgba(255, 255, 255, 0.12) 0%, transparent 45%),
+                linear-gradient(135deg, #008F94 0%, #00777B 45%, #005356 100%);
             color: var(--blanco);
-            padding: 100px 20px;
+            padding: 105px 20px 95px;
             text-align: center;
+            position: relative;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background-image: radial-gradient(rgba(255, 255, 255, 0.08) 1.5px, transparent 1.5px);
+            background-size: 28px 28px;
+            pointer-events: none;
+        }
+
+        .hero .container {
+            position: relative;
+            z-index: 2;
         }
 
         .hero h1 {
-            font-size: 3rem;
-            margin-bottom: 20px;
+            font-size: 3.2rem;
+            font-weight: 700;
+            margin-bottom: 18px;
+            letter-spacing: -0.5px;
+            text-shadow: 0 2px 12px rgba(0, 0, 0, 0.18);
         }
 
         .hero p {
-            font-size: 1.5rem;
-            margin-bottom: 40px;
+            font-size: 1.45rem;
+            margin-bottom: 38px;
             font-weight: 300;
             font-style: italic;
+            color: rgba(255, 255, 255, 0.95);
+            text-shadow: 0 1px 6px rgba(0, 0, 0, 0.12);
         }
 
         .hero-botones {
             display: flex;
-            gap: 20px;
+            gap: 15px;
             justify-content: center;
+            align-items: center;
             flex-wrap: wrap;
+            max-width: 980px;
+            margin: 0 auto;
         }
 
         /* Sección de Servicios */
@@ -214,6 +324,174 @@
             color: var(--texto-oscuro);
         }
 
+        /* Sección de Consultas Especializadas */
+        .consultas-section {
+            padding: 85px 0;
+            background-color: var(--fondo-gris);
+            border-top: 1px solid rgba(0, 143, 148, 0.08);
+        }
+
+        .section-subtitle-center {
+            text-align: center;
+            color: #555;
+            max-width: 700px;
+            margin: -35px auto 45px auto;
+            font-size: 1.05rem;
+            line-height: 1.6;
+        }
+
+        .consultas-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 22px;
+        }
+
+        .consulta-card {
+            background: var(--blanco);
+            padding: 30px 22px 24px;
+            border-radius: 12px;
+            text-align: center;
+            border-bottom: 4px solid var(--naranja-secundario);
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .consulta-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 24px rgba(0, 143, 148, 0.12);
+            border-bottom-color: var(--teal-primario);
+        }
+
+        .consulta-icon-wrapper {
+            width: 76px;
+            height: 76px;
+            border-radius: 50%;
+            background: rgba(227, 138, 55, 0.1);
+            border: 2px solid rgba(227, 138, 55, 0.35);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 16px;
+            transition: all 0.3s ease;
+        }
+
+        .consulta-card:hover .consulta-icon-wrapper {
+            background: var(--naranja-secundario);
+            border-color: var(--naranja-secundario);
+            transform: scale(1.06);
+        }
+
+        .consulta-icon-wrapper i {
+            font-size: 2.1rem;
+            color: var(--naranja-secundario);
+            transition: color 0.3s ease;
+        }
+
+        .consulta-icon-wrapper svg {
+            width: 38px;
+            height: 38px;
+            fill: var(--naranja-secundario);
+            transition: fill 0.3s ease;
+        }
+
+        .consulta-card:hover .consulta-icon-wrapper i {
+            color: var(--blanco);
+        }
+
+        .consulta-card:hover .consulta-icon-wrapper svg {
+            fill: var(--blanco);
+        }
+
+        .consulta-card h3 {
+            font-size: 1.2rem;
+            color: var(--texto-oscuro);
+            font-weight: 600;
+            margin-bottom: 6px;
+        }
+
+        .consulta-card p {
+            font-size: 0.88rem;
+            color: #666;
+            line-height: 1.5;
+            margin-bottom: 14px;
+        }
+
+        .consulta-btn-cita {
+            display: inline-flex;
+            align-items: center;
+            gap: 7px;
+            font-size: 0.84rem;
+            font-weight: 600;
+            color: var(--teal-primario);
+            text-decoration: none;
+            padding: 6px 14px;
+            border-radius: 20px;
+            background: rgba(0, 143, 148, 0.08);
+            transition: all 0.25s ease;
+        }
+
+        .consulta-card:hover .consulta-btn-cita {
+            background: var(--teal-primario);
+            color: var(--blanco);
+        }
+
+        /* Banner de ARS / Seguros Aceptados */
+        .ars-banner {
+            margin-top: 50px;
+            background: var(--blanco);
+            border-radius: 14px;
+            padding: 28px 24px;
+            box-shadow: 0 4px 18px rgba(0, 0, 0, 0.04);
+            border: 1px solid rgba(0, 143, 148, 0.15);
+            text-align: center;
+        }
+
+        .ars-banner h4 {
+            color: var(--teal-primario);
+            font-size: 1.18rem;
+            margin-bottom: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .ars-pills {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .ars-pill {
+            background: var(--fondo-gris);
+            color: var(--texto-oscuro);
+            border: 1px solid #e2e8f0;
+            padding: 8px 16px;
+            border-radius: 25px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.25s ease;
+        }
+
+        .ars-pill i {
+            color: var(--naranja-secundario);
+            font-size: 0.85rem;
+        }
+
+        .ars-pill:hover {
+            border-color: var(--teal-primario);
+            background: rgba(0, 143, 148, 0.06);
+            transform: translateY(-2px);
+        }
+
         /* Sección de Contacto */
         .contacto-section {
             padding: 80px 0;
@@ -237,6 +515,42 @@
             color: var(--naranja-secundario);
             margin-right: 20px;
             margin-top: 5px;
+        }
+
+        .map-container {
+            margin-top: 15px;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+            border: 1px solid rgba(0, 143, 148, 0.18);
+            background: var(--blanco);
+        }
+
+        .map-container iframe {
+            width: 100%;
+            height: 220px;
+            border: 0;
+            display: block;
+        }
+
+        .map-link {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 10px 14px;
+            background: var(--blanco);
+            color: var(--teal-primario);
+            text-decoration: none;
+            font-size: 0.88rem;
+            font-weight: 600;
+            border-top: 1px solid #f0f0f0;
+            transition: all 0.2s ease;
+        }
+
+        .map-link:hover {
+            background: rgba(0, 143, 148, 0.08);
+            color: var(--teal-primario);
         }
 
         .contacto-cta {
@@ -286,7 +600,217 @@
             transform: scale(1.1);
         }
 
+        /* Sección de Horarios */
+        .horarios-section {
+            padding: 85px 0;
+            background-color: var(--blanco);
+            border-top: 1px solid rgba(0, 143, 148, 0.08);
+        }
+
+        .horarios-subtitle {
+            text-align: center;
+            color: #666;
+            max-width: 650px;
+            margin: -35px auto 45px auto;
+            font-size: 1.05rem;
+        }
+
+        .horarios-container {
+            display: grid;
+            grid-template-columns: 1.25fr 0.95fr;
+            gap: 35px;
+            align-items: stretch;
+        }
+
+        .horarios-card {
+            background: var(--fondo-gris);
+            border-radius: 16px;
+            padding: 30px 25px;
+            box-shadow: 0 4px 18px rgba(0, 0, 0, 0.04);
+            border: 1px solid rgba(0, 143, 148, 0.12);
+        }
+
+        .horarios-blocks {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .horario-block {
+            background: var(--blanco);
+            border-radius: 14px;
+            padding: 22px 20px;
+            border-left: 5px solid var(--teal-primario);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.03);
+            transition: all 0.25s ease;
+        }
+
+        .horario-block:hover {
+            transform: translateX(4px);
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.06);
+        }
+
+        .horario-block.cerrado {
+            border-left-color: #cbd5e1;
+            background: #fafafa;
+        }
+
+        .horario-block.is-today {
+            background: rgba(0, 143, 148, 0.06);
+            border-left-color: var(--teal-primario);
+            box-shadow: 0 4px 14px rgba(0, 143, 148, 0.1);
+        }
+
+        .horario-block-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .horario-dias {
+            font-size: 1.15rem;
+            font-weight: 600;
+            color: var(--texto-oscuro);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .horario-dias i {
+            color: var(--teal-primario);
+            font-size: 1.25rem;
+        }
+
+        .horario-block.cerrado .horario-dias i {
+            color: #94a3b8;
+        }
+
+        .horario-badge {
+            background: rgba(0, 143, 148, 0.12);
+            color: var(--teal-primario);
+            font-size: 0.76rem;
+            padding: 3px 10px;
+            border-radius: 12px;
+            font-weight: 600;
+            letter-spacing: 0.3px;
+            text-transform: uppercase;
+        }
+
+        .horario-block.cerrado .horario-badge {
+            background: #e2e8f0;
+            color: #64748b;
+        }
+
+        .horario-block.is-today .horario-badge {
+            background: var(--naranja-secundario);
+            color: #fff;
+        }
+
+        .horario-block-time {
+            font-size: 1.35rem;
+            font-weight: 700;
+            color: var(--naranja-secundario);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 6px;
+        }
+
+        .horario-block.cerrado .horario-block-time {
+            color: #64748b;
+            font-size: 1.15rem;
+            font-weight: 600;
+        }
+
+        .horario-block-desc {
+            font-size: 0.88rem;
+            color: #666;
+            line-height: 1.45;
+            margin: 0;
+        }
+
+        .horarios-info-box {
+            background: linear-gradient(145deg, #008F94, #006e72);
+            color: var(--blanco);
+            border-radius: 16px;
+            padding: 35px 30px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            box-shadow: 0 10px 25px rgba(0, 143, 148, 0.22);
+        }
+
+        .status-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 9px;
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(8px);
+            padding: 8px 16px;
+            border-radius: 30px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: 20px;
+            align-self: flex-start;
+        }
+
+        .status-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background-color: #25D366;
+            box-shadow: 0 0 8px #25D366;
+            animation: pulse-dot 2s infinite;
+        }
+
+        @keyframes pulse-dot {
+            0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7); }
+            70% { transform: scale(1.05); box-shadow: 0 0 0 8px rgba(37, 211, 102, 0); }
+            100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); }
+        }
+
+        .horarios-info-box h3 {
+            font-size: 1.55rem;
+            margin-bottom: 14px;
+            color: var(--blanco);
+        }
+
+        .horarios-info-box p {
+            font-size: 0.96rem;
+            line-height: 1.6;
+            margin-bottom: 20px;
+            color: rgba(255, 255, 255, 0.92);
+        }
+
+        .horarios-highlights {
+            list-style: none;
+            padding: 0;
+            margin: 0 0 25px 0;
+        }
+
+        .horarios-highlights li {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            margin-bottom: 12px;
+            font-size: 0.93rem;
+        }
+
+        .horarios-highlights li i {
+            color: #F5A623;
+            margin-top: 3px;
+        }
+
         /* Responsive Design */
+        @media (max-width: 900px) {
+            .horarios-container {
+                grid-template-columns: 1fr;
+            }
+        }
+
         @media (max-width: 768px) {
             .contacto-grid {
                 grid-template-columns: 1fr;
@@ -297,6 +821,10 @@
             .header-content {
                 flex-direction: column;
                 gap: 15px;
+            }
+            .horario-block-header {
+                flex-direction: row;
+                justify-content: space-between;
             }
         }
     </style>
@@ -319,8 +847,10 @@
             <h1>Bienvenidos a GENIMAD</h1>
             <p>"Salud y Bienestar en cada paso"</p>
             <div class="hero-botones">
-                <a href="https://wa.me/18293744363?text=Hola,%20me%20gustaría%20agendar%20una%20cita%20médica." target="_blank" class="btn btn-whatsapp"><i class="fab fa-whatsapp"></i> Agendar por WhatsApp</a>
-                <a href="#servicios" class="btn btn-naranja">Ver Servicios</a>
+                <a href="https://wa.me/18293744363?text=Hola,%20me%20gustaría%20agendar%20una%20cita%20médica." target="_blank" class="btn btn-hero-cta"><i class="fab fa-whatsapp"></i> Agendar por WhatsApp</a>
+                <a href="#servicios" class="btn btn-hero-white"><i class="fas fa-stethoscope"></i> Ver Servicios</a>
+                <a href="#consultas" class="btn btn-hero-glass"><i class="fas fa-user-md"></i> Consultas Especializadas</a>
+                <a href="#horarios" class="btn btn-hero-glass"><i class="far fa-clock"></i> Horarios</a>
             </div>
         </div>
     </section>
@@ -383,6 +913,216 @@
         </div>
     </section>
 
+    <!-- Sección de Consultas Especializadas -->
+    <section id="consultas" class="consultas-section">
+        <div class="container">
+            <h2 class="section-title">Consultas Especializadas</h2>
+            <p class="section-subtitle-center">Atención médica personalizada con especialistas altamente calificados para ofrecerte un diagnóstico preciso y un tratamiento de vanguardia en Villa Mella.</p>
+
+            <div class="consultas-grid">
+                
+                <!-- Cardiología -->
+                <div class="consulta-card">
+                    <div class="consulta-icon-wrapper">
+                        <i class="fas fa-heart-pulse"></i>
+                    </div>
+                    <div>
+                        <h3>Cardiología</h3>
+                        <p>Evaluación clínica del corazón, electrocardiogramas y seguimiento de hipertensión y riesgo cardiovascular.</p>
+                    </div>
+                    <a href="https://wa.me/18293744363?text=Hola,%20me%20gustaría%20agendar%20una%20consulta%20de%20Cardiología." target="_blank" class="consulta-btn-cita">
+                        <i class="fab fa-whatsapp"></i> Agendar Cita
+                    </a>
+                </div>
+
+                <!-- Diabetología -->
+                <div class="consulta-card">
+                    <div class="consulta-icon-wrapper">
+                        <i class="fas fa-syringe"></i>
+                    </div>
+                    <div>
+                        <h3>Diabetología</h3>
+                        <p>Control glicémico, prevención de complicaciones, planes nutricionales y manejo integral de la diabetes.</p>
+                    </div>
+                    <a href="https://wa.me/18293744363?text=Hola,%20me%20gustaría%20agendar%20una%20consulta%20de%20Diabetología." target="_blank" class="consulta-btn-cita">
+                        <i class="fab fa-whatsapp"></i> Agendar Cita
+                    </a>
+                </div>
+
+                <!-- Dermatología -->
+                <div class="consulta-card">
+                    <div class="consulta-icon-wrapper">
+                        <i class="fas fa-hand-dots"></i>
+                    </div>
+                    <div>
+                        <h3>Dermatología</h3>
+                        <p>Diagnóstico y tratamiento de afecciones de la piel, alergias cutáneas, acné, manchas y cuidado capilar.</p>
+                    </div>
+                    <a href="https://wa.me/18293744363?text=Hola,%20me%20gustaría%20agendar%20una%20consulta%20de%20Dermatología." target="_blank" class="consulta-btn-cita">
+                        <i class="fab fa-whatsapp"></i> Agendar Cita
+                    </a>
+                </div>
+
+                <!-- Gastroenterología -->
+                <div class="consulta-card">
+                    <div class="consulta-icon-wrapper">
+                        <svg viewBox="0 0 64 64" aria-hidden="true">
+                            <path d="M42 6c-2.2 0-4 1.8-4 4v3.1c-2.3-.7-4.8-.8-7.3-.2-8.3 2-14.7 9.1-15.5 17.6-.8 8.1 3.5 15.8 10.5 19.3 2.5 1.3 4.4 3.5 5.4 6.2H31c-1.7 0-3 1.3-3 3s1.3 3 3 3h10c1.7 0 3-1.3 3-3v-4.8c4.2-2.3 7.6-6 9.6-10.6 3.2-7.5 1.9-16.3-3.3-22.5-.5-.6-1-1.2-1.6-1.8V10c0-2.2-1.8-4-4-4h-2.7zM42 22.8c4.2 5.1 5.2 12.2 2.6 18.2-1.8 4.2-5 7.4-9 9.1-1.6-3.8-4.4-6.9-8-8.7-5.5-2.8-8.9-8.7-8.3-14.8.6-6.4 5.5-11.7 11.8-13.2 2.2-.5 4.4-.4 6.5.3.8.3 1.6.7 2.4 1.2v7.9h2z"/>
+                        </svg>
+                    </div>
+                    <div>
+                        <h3>Gastroenterología</h3>
+                        <p>Trastornos digestivos, gastritis, reflujo gástrico, estreñimiento, endoscopía y colonoscopía.</p>
+                    </div>
+                    <a href="https://wa.me/18293744363?text=Hola,%20me%20gustaría%20agendar%20una%20consulta%20de%20Gastroenterología." target="_blank" class="consulta-btn-cita">
+                        <i class="fab fa-whatsapp"></i> Agendar Cita
+                    </a>
+                </div>
+
+                <!-- Ginecología -->
+                <div class="consulta-card">
+                    <div class="consulta-icon-wrapper">
+                        <i class="fas fa-venus"></i>
+                    </div>
+                    <div>
+                        <h3>Ginecología</h3>
+                        <p>Atención médica para la salud de la mujer, chequeos preventivos, citología y control ginecológico.</p>
+                    </div>
+                    <a href="https://wa.me/18293744363?text=Hola,%20me%20gustaría%20agendar%20una%20consulta%20de%20Ginecología." target="_blank" class="consulta-btn-cita">
+                        <i class="fab fa-whatsapp"></i> Agendar Cita
+                    </a>
+                </div>
+
+                <!-- Neumología -->
+                <div class="consulta-card">
+                    <div class="consulta-icon-wrapper">
+                        <i class="fas fa-lungs"></i>
+                    </div>
+                    <div>
+                        <h3>Neumología</h3>
+                        <p>Prevención y manejo de asma, alergias respiratorias, bronquitis crónica y salud pulmonar general.</p>
+                    </div>
+                    <a href="https://wa.me/18293744363?text=Hola,%20me%20gustaría%20agendar%20una%20consulta%20de%20Neumología." target="_blank" class="consulta-btn-cita">
+                        <i class="fab fa-whatsapp"></i> Agendar Cita
+                    </a>
+                </div>
+
+                <!-- Ortopeda -->
+                <div class="consulta-card">
+                    <div class="consulta-icon-wrapper">
+                        <i class="fas fa-bone"></i>
+                    </div>
+                    <div>
+                        <h3>Ortopeda</h3>
+                        <p>Evaluación y tratamiento de dolores articulares, lesiones musculares, columna y traumatología.</p>
+                    </div>
+                    <a href="https://wa.me/18293744363?text=Hola,%20me%20gustaría%20agendar%20una%20consulta%20de%20Ortopedia." target="_blank" class="consulta-btn-cita">
+                        <i class="fab fa-whatsapp"></i> Agendar Cita
+                    </a>
+                </div>
+
+                <!-- Y más especialidades -->
+                <div class="consulta-card">
+                    <div class="consulta-icon-wrapper">
+                        <i class="fas fa-plus-circle"></i>
+                    </div>
+                    <div>
+                        <h3>Y más...</h3>
+                        <p>Consulta médico general, valoraciones prequirúrgicas y coordinación de estudios complementarios.</p>
+                    </div>
+                    <a href="https://wa.me/18293744363?text=Hola,%20deseo%20información%20sobre%20otras%20especialidades%20médicas%20disponibles." target="_blank" class="consulta-btn-cita">
+                        <i class="fab fa-whatsapp"></i> Preguntar por más
+                    </a>
+                </div>
+
+            </div>
+
+            <!-- Banner de Seguros Médicos (ARS Aceptados) de la clínica -->
+            <div class="ars-banner">
+                <h4><i class="fas fa-shield-halved"></i> Seguros Médicos (ARS)</h4>
+                <div class="ars-pills">
+                    <span class="ars-pill"><i class="fas fa-check"></i> MetaSalud ARS</span>
+                    <span class="ars-pill"><i class="fas fa-check"></i> Servicios Médicos UASD</span>
+                    <span class="ars-pill"><i class="fas fa-check"></i> ARS CMD</span>
+                    <span class="ars-pill"><i class="fas fa-check"></i> ARS FUTURO</span>
+                    <span class="ars-pill"><i class="fas fa-check"></i> ARS GMA</span>
+                    <span class="ars-pill"><i class="fas fa-check"></i> ARS MONUMENTAL</span>
+                    <span class="ars-pill"><i class="fas fa-check"></i> Abel González</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sección de Horarios de Atención -->
+    <section id="horarios" class="horarios-section">
+        <div class="container">
+            <h2 class="section-title">Horarios de Atención</h2>
+            <p class="horarios-subtitle">Consulta nuestros horarios de atención en Villa Mella. Estamos a tu disposición de lunes a viernes para cuidar de tu salud y la de tu familia.</p>
+
+            <div class="horarios-container">
+                <!-- Horarios Organizados y Simplificados -->
+                <div class="horarios-card">
+                    <div class="horarios-blocks">
+                        <!-- Lunes a Viernes -->
+                        <div class="horario-block" id="block-laborable">
+                            <div class="horario-block-header">
+                                <span class="horario-dias"><i class="far fa-calendar-check"></i> Lunes a Viernes</span>
+                                <span class="horario-badge" id="tag-laborable">Laborable</span>
+                            </div>
+                            <div class="horario-block-time">
+                                <i class="far fa-clock"></i> 7:00 AM – 5:00 PM
+                            </div>
+                            <p class="horario-block-desc">Consultas especializadas, urgencias, toma de muestras de laboratorio y sonografías.</p>
+                        </div>
+
+                        <!-- Sábado y Domingo -->
+                        <div class="horario-block cerrado" id="block-fin-semana">
+                            <div class="horario-block-header">
+                                <span class="horario-dias"><i class="far fa-calendar-times"></i> Sábado y Domingo</span>
+                                <span class="horario-badge">Cerrado</span>
+                            </div>
+                            <div class="horario-block-time">
+                                <i class="fas fa-door-closed"></i> Cerrado
+                            </div>
+                            <p class="horario-block-desc">No laborable. Puedes escribirnos en cualquier momento por WhatsApp para dejar tu solicitud de cita agendada.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tarjeta Informativa de Servicios y Urgencias -->
+                <div class="horarios-info-box">
+                    <div>
+                        <div class="status-badge" id="badge-estado">
+                            <span class="status-dot"></span>
+                            <span id="texto-estado">Atención disponible</span>
+                        </div>
+                        <h3>Información de Servicios</h3>
+                        <p>Contamos con personal médico calificado y equipamiento moderno para brindarte una atención rápida y de confianza en Villa Mella.</p>
+                        
+                        <ul class="horarios-highlights">
+                            <li>
+                                <i class="fas fa-check-circle"></i>
+                                <span><strong>Urgencias Médicas:</strong> Atención prioritaria dentro de nuestro horario regular.</span>
+                            </li>
+                            <li>
+                                <i class="fas fa-check-circle"></i>
+                                <span><strong>Toma de Muestras de Laboratorio:</strong> Disponibles desde las 7:00 AM (en ayunas).</span>
+                            </li>
+                            <li>
+                                <i class="fas fa-check-circle"></i>
+                                <span><strong>Sonografía y Doppler:</strong> Con cita previa y turno por orden de llegada.</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <a href="https://wa.me/18293744363?text=Hola,%20deseo%20confirmar%20disponibilidad%20de%20horario%20para%20una%20consulta." target="_blank" class="btn btn-naranja" style="display: block; text-align: center;">
+                        <i class="fab fa-whatsapp"></i> Consultar Disponibilidad
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <section id="contacto" class="contacto-section">
         <div class="container">
             <h2 class="section-title">Contáctanos</h2>
@@ -391,9 +1131,23 @@
                 <div class="contacto-info">
                     <div class="info-item">
                         <i class="fas fa-map-marker-alt"></i>
-                        <div>
+                        <div style="flex: 1;">
                             <h4>Nuestra Ubicación</h4>
                             <p>Av. Hermanas Mirabal 449, Buena Vista 1era,<br>Villa Mella, Santo Domingo Norte.</p>
+                            
+                            <!-- Mapa de Google Maps estático embebido -->
+                            <div class="map-container">
+                                <iframe 
+                                    title="Mapa de ubicación - Centro de Atención Primaria GENIMAD"
+                                    src="https://maps.google.com/maps?q=18.5332961,-69.9066462&hl=es&z=17&output=embed"
+                                    loading="lazy"
+                                    allowfullscreen=""
+                                    referrerpolicy="no-referrer-when-downgrade">
+                                </iframe>
+                                <a href="https://maps.app.goo.gl/oNPK6iu3JxbWkXbB7" target="_blank" rel="noopener noreferrer" class="map-link">
+                                    <i class="fas fa-external-link-alt"></i> Abrir en Google Maps / Cómo llegar
+                                </a>
+                            </div>
                         </div>
                     </div>
                     <div class="info-item">
@@ -409,6 +1163,13 @@
                         <div>
                             <h4>Correo Electrónico</h4>
                             <p><a href="mailto:atencion.primaria@genimad.com" style="color: inherit; text-decoration: none;">atencion.primaria@genimad.com</a></p>
+                        </div>
+                    </div>
+                    <div class="info-item">
+                        <i class="fab fa-instagram"></i>
+                        <div>
+                            <h4>Síguenos en Instagram</h4>
+                            <p><a href="https://www.instagram.com/genimadrd/" target="_blank" rel="noopener noreferrer" style="color: inherit; text-decoration: none; font-weight: 600;">@GENIMADRD</a></p>
                         </div>
                     </div>
                 </div>
@@ -430,7 +1191,7 @@
 
     <footer>
         <div class="container">
-            <p>&copy; 2026 Centro de Atención Primaria GENIMAD. Todos los derechos reservados.</p>
+            <p>&copy; 2026 Centro de Atención Primaria GENIMAD. Todos los derechos reservados. &nbsp;|&nbsp; <a href="https://www.instagram.com/genimadrd/" target="_blank" rel="noopener noreferrer" style="color: inherit; text-decoration: none;"><i class="fab fa-instagram"></i> @GENIMADRD</a></p>
         </div>
     </footer>
 
@@ -438,5 +1199,50 @@
         <i class="fab fa-whatsapp"></i>
     </a>
 
+    <script>
+        // Detección automática del día actual y estado de atención
+        (function() {
+            const now = new Date();
+            const currentDay = now.getDay(); // 0: Domingo, 1: Lunes, etc.
+            const currentHour = now.getHours();
+            const currentMinutes = now.getMinutes();
+            const currentTime = currentHour + (currentMinutes / 60);
+
+            // Resaltar bloque actual (semana o fin de semana)
+            if (currentDay >= 1 && currentDay <= 5) {
+                const blockLaborable = document.getElementById('block-laborable');
+                const tagLaborable = document.getElementById('tag-laborable');
+                if (blockLaborable) blockLaborable.classList.add('is-today');
+                if (tagLaborable) tagLaborable.textContent = 'Hoy Laborable';
+            } else {
+                const blockFinSemana = document.getElementById('block-fin-semana');
+                if (blockFinSemana) blockFinSemana.classList.add('is-today');
+            }
+
+            // Calcular si el centro médico está abierto en este momento
+            let isOpen = false;
+            if (currentDay >= 1 && currentDay <= 5) {
+                // Lunes a Viernes: 7:00 AM a 5:00 PM (17:00)
+                isOpen = (currentTime >= 7 && currentTime < 17);
+            } else {
+                // Sábado y Domingo: Cerrado
+                isOpen = false;
+            }
+
+            const textoEstado = document.getElementById('texto-estado');
+            const dot = document.querySelector('.status-dot');
+            if (textoEstado && dot) {
+                if (isOpen) {
+                    textoEstado.textContent = 'Abierto ahora (Atención en curso)';
+                    dot.style.backgroundColor = '#25D366';
+                    dot.style.boxShadow = '0 0 8px #25D366';
+                } else {
+                    textoEstado.textContent = 'Cerrado en este momento';
+                    dot.style.backgroundColor = '#F5A623';
+                    dot.style.boxShadow = '0 0 8px #F5A623';
+                }
+            }
+        })();
+    </script>
 </body>
 </html>
