@@ -16,7 +16,7 @@
   'use strict';
 
   var CONFIG = {
-    ga4: '',      // ej. 'G-XXXXXXXXXX'  (Google Analytics 4)
+    ga4: 'G-0CPREY3DG0', // Google Analytics 4 (stream "genimad")
     metaPixel: '',// ej. '123456789012345'  (Meta Pixel: Facebook + Instagram)
     tiktokPixel: '' // ej. 'CXXXXXXXXXXXXXXXXXXX'  (TikTok Pixel)
   };
