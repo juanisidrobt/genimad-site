@@ -17,7 +17,7 @@
 
   var CONFIG = {
     ga4: 'G-0CPREY3DG0', // Google Analytics 4 (stream "genimad")
-    metaPixel: '',// ej. '123456789012345'  (Meta Pixel: Facebook + Instagram)
+    metaPixel: '2668812453535475', // Meta Pixel (Facebook + Instagram)
     tiktokPixel: '' // ej. 'CXXXXXXXXXXXXXXXXXXX'  (TikTok Pixel)
   };
 
